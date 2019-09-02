@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   newGameMessage: {
+    fontFamily: 'open-sans-bold',
     fontSize: 20,
     marginVertical: 5,
 
