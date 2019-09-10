@@ -2,7 +2,7 @@ import React, { useContext, } from 'react';
 import { View, Text, StyleSheet,} from 'react-native';
 
 import osContext from '../context/osContext';
-import theme from '../style/theme';
+import defaultStyles, { colors, } from '../style/theme';
 
 
 const Header = props => {
@@ -26,10 +26,11 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 30,
 
-    backgroundColor: theme.primary,
+    backgroundColor: colors.primary,
   },
   headerText: {
-    color: theme.background1,
+    ...defaultStyles.text,
+    color: colors.background1,
     fontSize: 20,
   },
 });

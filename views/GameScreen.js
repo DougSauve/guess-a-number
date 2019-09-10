@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 
 import Card from '../components/presentational_hocs/Card';
+import CustomButton from '../components/custom/CustomButton';
 import DecoratedNumber from '../components/DecoratedNumber';
+
+import { AntDesign, } from '@expo/vector-icons';
 
 const os = Platform.select({
   ios: 'ios',
@@ -29,7 +32,7 @@ const generateRandomNumber = (min, max, exclude = null) => {
 const GameScreen = props => {
   const isInitialRender = useRef(true); // mutable value that transcends rerenders
 
-  const [guess, setGuess] = useState(generateRandomNumber(1, 99));
+  const [guess, setGuess] = useState(generateRandomNumber(1, 100));
   const [lowest, setLowest] = useState(1);
   const [highest, setHighest] = useState(99);
 
@@ -42,12 +45,20 @@ const GameScreen = props => {
   }
 
   handlePressCorrect = () => {
-    if (guess === props.numberToGuess) props.moveToGameOverScreen();
-    else console.log('tricksy little hobbitses');
+    if (guess === props.numberToGuess) {
+      props.setGuesses([
+        ...props.guesses,
+        guess,
+      ]);
+
+      props.moveToGameOverScreen();
   }
 
   makeNewGuess = () => {
-    props.incrementNumberOfGuesses();
+    props.setGuesses([
+      ...props.guesses,
+      guess,
+    ]);
     setGuess(generateRandomNumber(lowest, highest, guess));
   }
 
@@ -74,31 +85,34 @@ const GameScreen = props => {
 
       <Card style={styles.card}>
         <View style={styles.buttonWrapper}>
-          <Button
+          <CustomButton
             onPress={handlePressHigher}
-            title={"Higher"}
-          />
+          >
+            <AntDesign name="up" />
+          </CustomButton>
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button
+        <CustomButton
             onPress={handlePressCorrect}
-            title={"Correct"}
-          />
+          >
+            <AntDesign name="check" />
+          </CustomButton>
         </View>
 
         <View style={styles.buttonWrapper}>
-          <Button
+        <CustomButton
             onPress={handlePressLower}
-            title={"Lower"}
-          />
+          >
+            <AntDesign name="down" />
+          </CustomButton>
         </View>
 
         <View style={styles.spacer}></View>
 
         <View style={styles.buttonWrapper}>
           <Button
-            onPress={() => props.setNumberToGuess(null)}
+            onPress={props.moveToStartScreen}
             title={"Just kidding, I cheated. Can we start over?"}
           />
         </View>

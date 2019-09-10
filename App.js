@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading, } from 'expo'; // force wait on splash screen until a condition is met
 
@@ -13,7 +13,7 @@ import GameOverScreen from './views/GameOverScreen';
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
-    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'), 
   })
 }
 
@@ -24,7 +24,7 @@ const os = Platform.select({
 
 const App = () => {
   const [initialDataIsLoading, setInitialDataIsLoading, ] = useState(true);
-  const [numberOfGuesses, setNumberOfGuesses, ] = useState(1); // 1 for the initial guess
+  const [guesses, setGuesses, ] = useState([]);
   const [numberToGuess, setNumberToGuess, ] = useState(null);
   const [isGameOver, setIsGameOver, ] = useState(false);
 
@@ -41,7 +41,7 @@ const App = () => {
 
   handleMoveToStartScreen = () => {
     setNumberToGuess(null);
-    setNumberOfGuesses(1);
+    setGuesses([]);
     setIsGameOver(false);
   }
 
@@ -58,14 +58,15 @@ const App = () => {
           isGameOver
           ? <GameOverScreen
             moveToStartScreen={handleMoveToStartScreen}
-            numberOfGuesses={numberOfGuesses}
+            guesses={guesses}
           /> 
           : numberToGuess
               ? <GameScreen 
                 moveToGameOverScreen={() => setIsGameOver(true)}
                 numberToGuess={numberToGuess} 
-                incrementNumberOfGuesses={() => setNumberOfGuesses(numberOfGuesses + 1)}
-                setNumberToGuess={setNumberToGuess}  
+                setGuesses={setGuesses}
+                guesses={guesses}
+                moveToStartScreen={handleMoveToStartScreen}
               />
               : <StartGameScreen 
                 setNumberToGuess={setNumberToGuess} 

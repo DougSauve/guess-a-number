@@ -9,11 +9,12 @@ import {
   View, 
 } from 'react-native';
 
+import CustomButton from '../components/custom/CustomButton';
 import Card from '../components/presentational_hocs/Card';
 import TextInput from '../components/presentational_hocs/CustomTextInput';
 import ConfirmBox from '../components/ConfirmBox';
 
-import theme from '../style/theme';
+import defaultStyle, { colors, } from '../style/theme';
 
 
 const StartGameScreen = props => {
@@ -81,7 +82,7 @@ const StartGameScreen = props => {
           </View>
 
           <Card style={styles.instructionsWrapper}>
-            <Text>Select a Number</Text>
+            <Text style={styles.instructionsText}>Select a Number</Text>
 
             {/* <View style={styles.TextInputWrapper}> */}
             <View
@@ -101,10 +102,11 @@ const StartGameScreen = props => {
 
             <View style={styles.buttonContainer}>
               <View style={styles.buttonWrapper}>
-                <Button 
+                <CustomButton 
                   onPress={handleResetButton}
-                  title="Reset"
-                />
+                >
+                  Reset
+                </CustomButton>
               </View>
 
               <View style={styles.buttonWrapper}>
@@ -146,13 +148,16 @@ const styles = StyleSheet.create({
   confirmMessage: {
     marginVertical: 10,
   },
+  instructionsText: {
+    ...defaultStyle.text,
+  },
   instructionsWrapper: {
     alignItems: 'center',
     width: 300,
     padding: 10,
   },
   newGameMessage: {
-    fontFamily: 'open-sans-bold',
+     ...defaultStyle.text,
     fontSize: 20,
     marginVertical: 5,
 
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
   newGameMessageWrapper: {
     width: '100%',
     alignItems: 'center',
-    backgroundColor: theme.secondary,
+    backgroundColor: colors.secondary,
   },
   textInput: {
     width: 30,

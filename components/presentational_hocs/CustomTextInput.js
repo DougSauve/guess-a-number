@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, View, StyleSheet, } from 'react-native';
-import theme from '../../style/theme';
+import { colors, } from '../../style/theme';
 
 const CustomTextInput = props => (
   <View
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   textInputWrapper: {
     backgroundColor: 'white',
-    borderBottomColor: theme.secondary,
+    borderBottomColor: colors.secondary,
     borderBottomWidth: 1,
     elevation: 5,
     margin: 5,

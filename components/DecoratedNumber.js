@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StyleSheet, Text, View, } from 'react-native';
 
-import theme from '../style/theme';
+import { colors, } from '../style/theme';
 
 const os = Platform.select({
   ios: 'ios',
@@ -25,7 +25,7 @@ const DecoratedNumber = props => {
 const styles = StyleSheet.create({
   numberToGuessText: {
     textAlign: 'center',
-    color: theme.primary,
+    color: colors.primary,
     fontWeight: 'bold',
     fontSize: 20,
   },
